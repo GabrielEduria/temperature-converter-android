@@ -1,7 +1,9 @@
 // TemperatureConverter.js
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
 
+
+const { width, height } = Dimensions.get('window');
 export default function TemperatureConverter() {
   const [input, setInput] = useState('');
   const [fromUnit, setFromUnit] = useState('Celsius');
@@ -105,89 +107,113 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#1b1b1b',
     flex: 1,
+    alignItems: 'center',
     justifyContent: 'center',
     paddingHorizontal: 20,
-    paddingVertical: 40,
+    paddingVertical: 30,
   },
+
   title: {
     color: '#ffa31a',
-    fontSize: 28,
+    fontSize: 24,
     fontWeight: 'bold',
     textAlign: 'center',
-    marginBottom: 30,
-  },
-  conversionIndicator: {
     marginBottom: 20,
+  },
+
+  conversionIndicator: {
+    marginBottom: 15,
     alignItems: 'center',
   },
+
   indicatorText: {
     color: '#ffffff',
-    fontSize: 18,
+    fontSize: 16,
   },
+
   highlight: {
     color: '#ffa31a',
     fontWeight: 'bold',
   },
+
   input: {
     backgroundColor: '#292929',
     color: '#ffffff',
-    padding: 14,
+    padding: 12,
     borderRadius: 8,
-    fontSize: 20,
-    marginBottom: 30,
+    fontSize: 18,
+    marginBottom: 20,
+    width: '100%',
   },
+
   selectionContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginBottom: 30,
+    gap: 12,
+    marginBottom: 20,
+    width: '100%',
   },
+
   selectionGroup: {
     flex: 1,
   },
+
   selectionLabel: {
     color: '#808080',
     fontWeight: '600',
-    marginBottom: 10,
-    fontSize: 16,
+    marginBottom: 8,
+    fontSize: 14,
     textAlign: 'center',
   },
+
   button: {
     backgroundColor: '#292929',
-    paddingVertical: 12,
-    marginVertical: 5,
+    paddingVertical: 10,
+    marginVertical: 4,
     borderRadius: 8,
     alignItems: 'center',
   },
+
   activeButton: {
     backgroundColor: '#ffa31a',
   },
+
   buttonText: {
     color: '#ffffff',
     fontWeight: '600',
-    fontSize: 16,
+    fontSize: 14,
   },
+
   convertButton: {
     backgroundColor: '#ffa31a',
-    paddingVertical: 15,
-    borderRadius: 8,
+    paddingVertical: 14,
+    paddingHorizontal: 30,
+    borderRadius: 10,
+    marginVertical: 12,
     alignItems: 'center',
+    alignSelf: 'center',
+    minWidth: 180,
   },
+
   convertButtonText: {
     color: '#1b1b1b',
     fontWeight: 'bold',
-    fontSize: 20,
+    fontSize: 18,
   },
+
   resultContainer: {
-    marginTop: 40,
+    marginTop: 30,
     alignItems: 'center',
   },
+
   resultLabel: {
     color: '#808080',
-    fontSize: 18,
+    fontSize: 16,
     marginBottom: 8,
   },
+
   result: {
-    fontSize: 28,
+    fontSize: 24,
     color: '#ffffff',
     fontWeight: 'bold',
   },
