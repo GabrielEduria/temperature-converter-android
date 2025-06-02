@@ -1,6 +1,10 @@
+// App.js
 import React, { useState } from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, Image, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import TemperatureConverter from './TemperatureConverter';
+import WeatherScreen from './WeatherScreen';
+import QuizScreen from './QuizScreen';   // new import
+import FunFacts from './FunFacts';       // new import
 
 const members = [
   { name: 'Gabriel Ezekiel B. Eduria', photo: require('./assets/member1.jpg') },
@@ -20,6 +24,7 @@ export default function App() {
     </TouchableOpacity>
   );
 
+  // Intro screens
   if (screen === 0) {
     return (
       <View style={styles.container}>
@@ -32,7 +37,7 @@ export default function App() {
   if (screen === 1) {
     return (
       <View style={styles.container}>
-        <Text style={styles.title}>Made by BSCS 3 - Y2 -1 students</Text>
+        <Text style={styles.title}>Submitted to Ms. Batac</Text>
         {renderButton('Continue', () => setScreen(2))}
       </View>
     );
@@ -58,8 +63,49 @@ export default function App() {
     );
   }
 
+  // Main app screen with Weather and Quiz buttons + Fun Facts preview
   if (screen === 3) {
-    return <TemperatureConverter />;
+    return (
+      <ScrollView style={{ flex: 1, backgroundColor: '#1b1b1b' }}>
+        <TemperatureConverter />
+
+        <View style={styles.buttonRow}>
+          {renderButton('View Weather', () => setScreen(4))}
+          {renderButton('Take Quiz', () => setScreen(5))}
+        </View>
+
+        <View style={styles.membersContainer}>
+          <Text style={styles.membersTitle}>Members:</Text>
+          {members.map((member, index) => (
+            <View key={index} style={styles.memberItem}>
+              <Image source={member.photo} style={styles.memberPhotoSmall} />
+              <Text style={styles.memberNameSmall}>{member.name}</Text>
+            </View>
+          ))}
+        </View>
+
+        <View style={styles.funFactsContainer}>
+          <Text style={styles.funFactsTitle}>Fun Fact:</Text>
+          <FunFacts />
+        </View>
+      </ScrollView>
+    );
+  }
+
+  if (screen === 4) {
+    return (
+      <View style={{ flex: 1 }}>
+        <WeatherScreen onBack={() => setScreen(3)} />
+      </View>
+    );
+  }
+
+  if (screen === 5) {
+    return (
+      <View style={{ flex: 1 }}>
+        <QuizScreen onBack={() => setScreen(3)} />
+      </View>
+    );
   }
 
   return null;
@@ -84,8 +130,9 @@ const styles = StyleSheet.create({
     width: 300,
     height: 300,
     marginBottom: 20,
-
     borderColor: '#ffa31a',
+    borderWidth: 2,
+    borderRadius: 12,
   },
   memberName: {
     fontSize: 22,
@@ -98,10 +145,62 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     paddingHorizontal: 30,
     borderRadius: 8,
+    margin: 8,
+    minWidth: 130,
   },
   buttonText: {
     color: '#1b1b1b',
     fontWeight: 'bold',
     fontSize: 16,
+    textAlign: 'center',
+  },
+  buttonRow: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginVertical: 15,
+  },
+  membersContainer: {
+    paddingHorizontal: 20,
+    paddingBottom: 40,
+  },
+  membersTitle: {
+    color: '#ffa31a',
+    fontSize: 22,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginBottom: 16,
+  },
+  memberItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#292929',
+    padding: 10,
+    marginBottom: 10,
+    borderRadius: 10,
+  },
+  memberPhotoSmall: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    marginRight: 12,
+  },
+  memberNameSmall: {
+    color: '#ffffff',
+    fontSize: 16,
+    fontWeight: '500',
+  },
+  funFactsContainer: {
+    paddingHorizontal: 20,
+    marginBottom: 40,
+    backgroundColor: '#292929',
+    marginHorizontal: 20,
+    borderRadius: 10,
+    padding: 15,
+  },
+  funFactsTitle: {
+    color: '#ffa31a',
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 8,
   },
 });
