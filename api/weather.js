@@ -1,15 +1,20 @@
 // api/weather.js
 export async function getWeather() {
-  const response = await fetch(
-    'https://api.open-meteo.com/v1/forecast?latitude=14.6866&longitude=120.9795&hourly=temperature_2m&timezone=Asia%2FSingapore'
-  );
-  const data = await response.json();
+  const API_KEY = '70e1909399564ae9a01213905250206';
+  const city = 'Valenzuela';
 
-  // Just take the first hourly temperature as current temp
-  const latestTemp = data.hourly.temperature_2m[0];
+  try {
+    const response = await fetch(
+      `https://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=${city}&aqi=no`
+    );
+    const data = await response.json();
 
-  return {
-    currentTemperature: latestTemp,
-    description: 'Sunny', // You can adjust this if API has description
-  };
+    return {
+      currentTemperature: data.current.temp_c,
+      description: data.current.condition.text,
+    };
+  } catch (error) {
+    console.error('Weather API Error:', error);
+    return null;
+  }
 }

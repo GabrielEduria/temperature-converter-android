@@ -28,6 +28,31 @@ const quizQuestions = [
     options: ["37°C", "25°C", "98°C", "0°C"],
     answer: "37°C",
   },
+  {
+    question: "Which temperature scale has no negative numbers?",
+    options: ["Kelvin", "Fahrenheit", "Celsius", "Rankine"],
+    answer: "Kelvin",
+  },
+  {
+    question: "What is the freezing point of water in Fahrenheit?",
+    options: ["0°F", "32°F", "100°F", "273°F"],
+    answer: "32°F",
+  },
+  {
+    question: "What is room temperature in Celsius?",
+    options: ["25°C", "0°C", "50°C", "37°C"],
+    answer: "25°C",
+  },
+  {
+    question: "What is the boiling point of water in Kelvin?",
+    options: ["273K", "373K", "100K", "212K"],
+    answer: "373K",
+  },
+  {
+    question: "Which temperature is the hottest?",
+    options: ["100°C", "373K", "212°F", "200°C"],
+    answer: "200°C",
+  },
 ];
 
 export default function QuizScreen({ onBack }) {
@@ -45,18 +70,26 @@ export default function QuizScreen({ onBack }) {
       setShowResult(true);
     }
   };
+ 
+if (showResult) {
+  const passed = score >= 7;
 
-  if (showResult) {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.title}>Quiz Complete!</Text>
-        <Text style={styles.score}>Your Score: {score} / {quizQuestions.length}</Text>
-        <TouchableOpacity style={styles.button} onPress={onBack}>
-          <Text style={styles.buttonText}>Back to Main</Text>
-        </TouchableOpacity>
-      </View>
-    );
-  }
+  return (
+    <View style={styles.container}>
+      <Text style={styles.title}>Quiz Complete!</Text>
+      <Text style={styles.score}>You scored {score} / {quizQuestions.length}</Text>
+
+      {passed && (
+        <Text style={styles.passMessage}>🎉 Congratulations, you passed!</Text>
+      )}
+
+      <TouchableOpacity style={styles.button} onPress={onBack}>
+        <Text style={styles.buttonText}>Back to Main</Text>
+      </TouchableOpacity>
+    </View>
+  );
+}
+
 
   const question = quizQuestions[current];
 
@@ -96,6 +129,13 @@ const styles = StyleSheet.create({
     marginBottom: 30,
     textAlign: 'center',
   },
+  passMessage: {
+  fontSize: 20,
+  color: '#00ff88',
+  textAlign: 'center',
+  marginVertical: 10,
+  fontWeight: 'bold',
+},
   question: {
     fontSize: 22,
     color: '#ffa31a',

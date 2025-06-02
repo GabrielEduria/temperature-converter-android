@@ -74,15 +74,7 @@ export default function App() {
           {renderButton('Take Quiz', () => setScreen(5))}
         </View>
 
-        <View style={styles.membersContainer}>
-          <Text style={styles.membersTitle}>Members:</Text>
-          {members.map((member, index) => (
-            <View key={index} style={styles.memberItem}>
-              <Image source={member.photo} style={styles.memberPhotoSmall} />
-              <Text style={styles.memberNameSmall}>{member.name}</Text>
-            </View>
-          ))}
-        </View>
+    
 
         <View style={styles.funFactsContainer}>
           <Text style={styles.funFactsTitle}>Fun Fact:</Text>
@@ -130,8 +122,6 @@ const styles = StyleSheet.create({
     width: 300,
     height: 300,
     marginBottom: 20,
-    borderColor: '#ffa31a',
-    borderWidth: 2,
     borderRadius: 12,
   },
   memberName: {
